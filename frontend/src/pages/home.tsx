@@ -1,15 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { counterState, squaredState } from "@/atoms/example";
 import { Button } from "@/components/ui/button";
-import { useLoaderData } from "react-router-dom";
+import { listCourses } from "@/api/course.service";
 
 const HomePage: React.FC = () => {
   const [counter, setCounter] = useRecoilState(counterState);
   const squared = useRecoilValue(squaredState);
 
-  const data = useLoaderData();
-  console.log(data);
+  useEffect(() => {
+    listCourses().then(console.log);
+  }, []);
 
   return (
     <div className="w-full min-h-screen flex flex-col justify-center items-center">

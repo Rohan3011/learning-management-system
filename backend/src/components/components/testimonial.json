@@ -1,0 +1,36 @@
+{
+  "collectionName": "components_components_testimonials",
+  "info": {
+    "displayName": " Testimonial",
+    "icon": "quote",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "image": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": false
+    },
+    "rating": {
+      "type": "integer"
+    },
+    "name": {
+      "type": "string"
+    },
+    "position": {
+      "type": "string"
+    },
+    "organization": {
+      "type": "string"
+    },
+    "review": {
+      "type": "text"
+    }
+  }
+}

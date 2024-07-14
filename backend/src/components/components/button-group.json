@@ -1,0 +1,21 @@
+{
+  "collectionName": "components_components_button_groups",
+  "info": {
+    "displayName": "ButtonGroup",
+    "icon": "cursor",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "ButtonOne": {
+      "type": "component",
+      "repeatable": false,
+      "component": "components.button"
+    },
+    "ButtonTwo": {
+      "type": "component",
+      "repeatable": false,
+      "component": "components.button"
+    }
+  }
+}

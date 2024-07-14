@@ -1,0 +1,39 @@
+{
+  "collectionName": "components_components_course_lists",
+  "info": {
+    "displayName": "CourseList",
+    "icon": "bulletList",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "courses": {
+      "displayName": "CourseItem",
+      "type": "component",
+      "repeatable": true,
+      "component": "components.course-item"
+    },
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    },
+    "thumbnail": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": false
+    },
+    "meta": {
+      "type": "json"
+    },
+    "subtitle": {
+      "type": "string"
+    }
+  }
+}

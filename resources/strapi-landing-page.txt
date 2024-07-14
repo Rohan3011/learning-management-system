@@ -1,0 +1,30 @@
+- Hero Section
+	- image
+	- title
+	- description
+	- cta group
+- course section[]
+	- image
+	- video?
+	- video meta_data
+	- title
+	- description
+ 	- course item
+		- thumbnail
+		- title
+		- description
+	- cta group
+- testimonals[]
+	- image
+	- rating
+	- name
+	- position
+	- organization
+	- review
+
+- infocard
+	- image
+	- title
+	- description
+	- cta group
+- footer

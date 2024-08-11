@@ -9,7 +9,7 @@
   },
   "scripts": {
     "build": "strapi build",
-    "dev": "strapi develop",
+    "dev": "strapi develop --watch-admin",
     "start": "strapi start",
     "strapi": "strapi"
   },
@@ -18,6 +18,7 @@
     "@strapi/plugin-cloud": "4.24.0",
     "@strapi/plugin-documentation": "^4.25.1",
     "@strapi/plugin-i18n": "4.24.0",
+    "@strapi/plugin-seo": "^1.9.9",
     "@strapi/plugin-users-permissions": "4.24.0",
     "@strapi/strapi": "4.24.0",
     "better-sqlite3": "8.6.0",
@@ -25,14 +26,15 @@
     "react-dom": "^18.0.0",
     "react-is": "^18.3.1",
     "react-router-dom": "5.3.4",
+    "strapi-plugin-navigation": "^2.5.2",
     "styled-components": "5.3.3"
   },
+  "packageManager": "yarn@1.22.0",
   "engines": {
     "node": ">=18.0.0 <=20.x.x",
     "npm": ">=6.0.0"
   },
   "strapi": {
     "uuid": "f484fb26-d492-457b-80a6-a4e9a22730b3"
-  },
-  "packageManager": "yarn@1.22.0"
+  }
 }

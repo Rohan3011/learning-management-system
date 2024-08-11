@@ -1,3 +1,6 @@
+import logo from "./extensions/ly.svg";
+import favicon from "./extensions/favicon.ico";
+
 const config = {
   locales: [
     // 'ar',
@@ -27,6 +30,25 @@ const config = {
     // 'zh-Hans',
     // 'zh',
   ],
+  auth: {
+    logo,
+  },
+  menu: {
+    logo,
+  },
+  head: {
+    favicon,
+  },
+  tutorials: false,
+  notifications: {
+    releases: false,
+  },
+
+  translations: {
+    en: {
+      "app.components.HomePage.welcome": "Hello World",
+    },
+  },
 };
 
 const bootstrap = (app) => {

@@ -1,0 +1,24 @@
+{
+  "collectionName": "components_global_navbars",
+  "info": {
+    "displayName": "Navbar",
+    "icon": "filter",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "logo": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "cta": {
+      "type": "component",
+      "repeatable": true,
+      "component": "components.button"
+    }
+  }
+}

@@ -362,6 +362,169 @@ export interface AdminTransferTokenPermission extends Schema.CollectionType {
   };
 }
 
+export interface ApiCourseCourse extends Schema.CollectionType {
+  collectionName: 'courses';
+  info: {
+    singularName: 'course';
+    pluralName: 'courses';
+    displayName: 'Course';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String;
+    description: Attribute.Blocks;
+    users_permissions_user: Attribute.Relation<
+      'api::course.course',
+      'manyToOne',
+      'plugin::users-permissions.user'
+    >;
+    lessons: Attribute.Relation<
+      'api::course.course',
+      'oneToMany',
+      'api::lesson.lesson'
+    >;
+    enrollments: Attribute.Relation<
+      'api::course.course',
+      'oneToMany',
+      'api::enrollment.enrollment'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::course.course',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::course.course',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiEnrollmentEnrollment extends Schema.CollectionType {
+  collectionName: 'enrollments';
+  info: {
+    singularName: 'enrollment';
+    pluralName: 'enrollments';
+    displayName: 'Enrollment';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    course: Attribute.Relation<
+      'api::enrollment.enrollment',
+      'manyToOne',
+      'api::course.course'
+    >;
+    user: Attribute.Relation<
+      'api::enrollment.enrollment',
+      'oneToOne',
+      'plugin::users-permissions.user'
+    >;
+    status: Attribute.Enumeration<['enrolled', 'completed']>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::enrollment.enrollment',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::enrollment.enrollment',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiLessonLesson extends Schema.CollectionType {
+  collectionName: 'lessons';
+  info: {
+    singularName: 'lesson';
+    pluralName: 'lessons';
+    displayName: 'Lesson';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String;
+    content: Attribute.Blocks;
+    course: Attribute.Relation<
+      'api::lesson.lesson',
+      'manyToOne',
+      'api::course.course'
+    >;
+    index: Attribute.Integer;
+    video: Attribute.Media;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::lesson.lesson',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::lesson.lesson',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiPagePage extends Schema.CollectionType {
+  collectionName: 'pages';
+  info: {
+    singularName: 'page';
+    pluralName: 'pages';
+    displayName: 'Page';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String;
+    slug: Attribute.UID<'api::page.page', 'name'>;
+    sections: Attribute.DynamicZone<
+      [
+        'components.button-group',
+        'components.button',
+        'components.course-item',
+        'components.course-list',
+        'components.hero-section',
+        'components.testimonial-list',
+        'components.testimonial',
+        'components.title'
+      ]
+    >;
+    SEO: Attribute.Component<'shared.seo', true>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<'api::page.page', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<'api::page.page', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+  };
+}
+
 export interface PluginUploadFile extends Schema.CollectionType {
   collectionName: 'files';
   info: {
@@ -771,6 +934,11 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
       'manyToOne',
       'plugin::users-permissions.role'
     >;
+    courses: Attribute.Relation<
+      'plugin::users-permissions.user',
+      'oneToMany',
+      'api::course.course'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
@@ -788,45 +956,31 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   };
 }
 
-export interface ApiCourseCourse extends Schema.CollectionType {
-  collectionName: 'courses';
+export interface PluginNavigationAudience extends Schema.CollectionType {
+  collectionName: 'audience';
   info: {
-    singularName: 'course';
-    pluralName: 'courses';
-    displayName: 'Course';
+    singularName: 'audience';
+    pluralName: 'audiences';
+    displayName: 'Audience';
+    name: 'audience';
   };
   options: {
-    draftAndPublish: true;
+    increments: true;
+    comment: 'Audience';
   };
   attributes: {
-    title: Attribute.String;
-    description: Attribute.Blocks;
-    instructors: Attribute.Relation<
-      'api::course.course',
-      'oneToMany',
-      'admin::user'
-    >;
-    lessons: Attribute.Relation<
-      'api::course.course',
-      'oneToMany',
-      'api::lesson.lesson'
-    >;
-    enrollments: Attribute.Relation<
-      'api::course.course',
-      'oneToMany',
-      'api::enrollment.enrollment'
-    >;
+    name: Attribute.String & Attribute.Required;
+    key: Attribute.UID<'plugin::navigation.audience', 'name'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
-      'api::course.course',
+      'plugin::navigation.audience',
       'oneToOne',
       'admin::user'
     > &
       Attribute.Private;
     updatedBy: Attribute.Relation<
-      'api::course.course',
+      'plugin::navigation.audience',
       'oneToOne',
       'admin::user'
     > &
@@ -834,39 +988,130 @@ export interface ApiCourseCourse extends Schema.CollectionType {
   };
 }
 
-export interface ApiEnrollmentEnrollment extends Schema.CollectionType {
-  collectionName: 'enrollments';
+export interface PluginNavigationNavigation extends Schema.CollectionType {
+  collectionName: 'navigations';
   info: {
-    singularName: 'enrollment';
-    pluralName: 'enrollments';
-    displayName: 'Enrollment';
+    singularName: 'navigation';
+    pluralName: 'navigations';
+    displayName: 'Navigation';
+    name: 'navigation';
   };
   options: {
-    draftAndPublish: true;
+    increments: true;
+    comment: '';
+  };
+  pluginOptions: {
+    'content-manager': {
+      visible: false;
+    };
+    'content-type-builder': {
+      visible: false;
+    };
   };
   attributes: {
-    course: Attribute.Relation<
-      'api::enrollment.enrollment',
+    name: Attribute.Text & Attribute.Required;
+    slug: Attribute.UID & Attribute.Required;
+    visible: Attribute.Boolean & Attribute.DefaultTo<false>;
+    items: Attribute.Relation<
+      'plugin::navigation.navigation',
+      'oneToMany',
+      'plugin::navigation.navigation-item'
+    >;
+    localizations: Attribute.Relation<
+      'plugin::navigation.navigation',
+      'oneToMany',
+      'plugin::navigation.navigation'
+    >;
+    localeCode: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'plugin::navigation.navigation',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'plugin::navigation.navigation',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface PluginNavigationNavigationItem extends Schema.CollectionType {
+  collectionName: 'navigations_items';
+  info: {
+    singularName: 'navigation-item';
+    pluralName: 'navigation-items';
+    displayName: 'Navigation Item';
+    name: 'navigation-item';
+  };
+  options: {
+    increments: true;
+    timestamps: true;
+    comment: 'Navigation Item';
+  };
+  pluginOptions: {
+    'content-manager': {
+      visible: false;
+    };
+    'content-type-builder': {
+      visible: false;
+    };
+    i18n: {
+      localized: false;
+    };
+  };
+  attributes: {
+    title: Attribute.Text &
+      Attribute.Required &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: false;
+        };
+      }>;
+    type: Attribute.Enumeration<['INTERNAL', 'EXTERNAL', 'WRAPPER']> &
+      Attribute.DefaultTo<'INTERNAL'>;
+    path: Attribute.Text;
+    externalPath: Attribute.Text;
+    uiRouterKey: Attribute.String;
+    menuAttached: Attribute.Boolean & Attribute.DefaultTo<false>;
+    order: Attribute.Integer & Attribute.DefaultTo<0>;
+    collapsed: Attribute.Boolean & Attribute.DefaultTo<false>;
+    autoSync: Attribute.Boolean & Attribute.DefaultTo<true>;
+    related: Attribute.Relation<
+      'plugin::navigation.navigation-item',
+      'oneToOne',
+      'plugin::navigation.navigations-items-related'
+    >;
+    parent: Attribute.Relation<
+      'plugin::navigation.navigation-item',
+      'oneToOne',
+      'plugin::navigation.navigation-item'
+    >;
+    master: Attribute.Relation<
+      'plugin::navigation.navigation-item',
       'manyToOne',
-      'api::course.course'
+      'plugin::navigation.navigation'
     >;
-    user: Attribute.Relation<
-      'api::enrollment.enrollment',
-      'oneToOne',
-      'plugin::users-permissions.user'
+    audience: Attribute.Relation<
+      'plugin::navigation.navigation-item',
+      'oneToMany',
+      'plugin::navigation.audience'
     >;
-    status: Attribute.Enumeration<['enrolled', 'completed']>;
+    additionalFields: Attribute.JSON & Attribute.DefaultTo<{}>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
-      'api::enrollment.enrollment',
+      'plugin::navigation.navigation-item',
       'oneToOne',
       'admin::user'
     > &
       Attribute.Private;
     updatedBy: Attribute.Relation<
-      'api::enrollment.enrollment',
+      'plugin::navigation.navigation-item',
       'oneToOne',
       'admin::user'
     > &
@@ -874,80 +1119,47 @@ export interface ApiEnrollmentEnrollment extends Schema.CollectionType {
   };
 }
 
-export interface ApiLandingPageLandingPage extends Schema.SingleType {
-  collectionName: 'landing_pages';
+export interface PluginNavigationNavigationsItemsRelated
+  extends Schema.CollectionType {
+  collectionName: 'navigations_items_related';
   info: {
-    singularName: 'landing-page';
-    pluralName: 'landing-pages';
-    displayName: 'Landing Page';
-    description: '';
+    singularName: 'navigations-items-related';
+    pluralName: 'navigations-items-relateds';
+    displayName: 'Navigations Items Related';
+    name: 'navigations_items_related';
   };
   options: {
-    draftAndPublish: true;
+    increments: true;
+    timestamps: false;
+    populateCreatorFields: false;
+  };
+  pluginOptions: {
+    'content-manager': {
+      visible: false;
+    };
+    'content-type-builder': {
+      visible: false;
+    };
+    i18n: {
+      localized: false;
+    };
   };
   attributes: {
-    content: Attribute.DynamicZone<
-      [
-        'components.button-group',
-        'components.button',
-        'components.course-item',
-        'components.course-list',
-        'components.hero-section',
-        'components.testimonial-list',
-        'components.testimonial',
-        'components.title'
-      ]
-    >;
+    related_id: Attribute.String & Attribute.Required;
+    related_type: Attribute.String & Attribute.Required;
+    field: Attribute.String & Attribute.Required;
+    order: Attribute.Integer & Attribute.Required;
+    master: Attribute.String & Attribute.Required;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
-      'api::landing-page.landing-page',
+      'plugin::navigation.navigations-items-related',
       'oneToOne',
       'admin::user'
     > &
       Attribute.Private;
     updatedBy: Attribute.Relation<
-      'api::landing-page.landing-page',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiLessonLesson extends Schema.CollectionType {
-  collectionName: 'lessons';
-  info: {
-    singularName: 'lesson';
-    pluralName: 'lessons';
-    displayName: 'Lesson';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    title: Attribute.String;
-    content: Attribute.Blocks;
-    course: Attribute.Relation<
-      'api::lesson.lesson',
-      'manyToOne',
-      'api::course.course'
-    >;
-    index: Attribute.Integer;
-    video: Attribute.Media;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::lesson.lesson',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::lesson.lesson',
+      'plugin::navigation.navigations-items-related',
       'oneToOne',
       'admin::user'
     > &
@@ -965,6 +1177,10 @@ declare module '@strapi/types' {
       'admin::api-token-permission': AdminApiTokenPermission;
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
+      'api::course.course': ApiCourseCourse;
+      'api::enrollment.enrollment': ApiEnrollmentEnrollment;
+      'api::lesson.lesson': ApiLessonLesson;
+      'api::page.page': ApiPagePage;
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;
       'plugin::content-releases.release': PluginContentReleasesRelease;
@@ -973,10 +1189,10 @@ declare module '@strapi/types' {
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
-      'api::course.course': ApiCourseCourse;
-      'api::enrollment.enrollment': ApiEnrollmentEnrollment;
-      'api::landing-page.landing-page': ApiLandingPageLandingPage;
-      'api::lesson.lesson': ApiLessonLesson;
+      'plugin::navigation.audience': PluginNavigationAudience;
+      'plugin::navigation.navigation': PluginNavigationNavigation;
+      'plugin::navigation.navigation-item': PluginNavigationNavigationItem;
+      'plugin::navigation.navigations-items-related': PluginNavigationNavigationsItemsRelated;
     }
   }
 }

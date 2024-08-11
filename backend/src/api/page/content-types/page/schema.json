@@ -1,10 +1,10 @@
 {
-  "kind": "singleType",
-  "collectionName": "landing_pages",
+  "kind": "collectionType",
+  "collectionName": "pages",
   "info": {
-    "singularName": "landing-page",
-    "pluralName": "landing-pages",
-    "displayName": "Landing Page",
+    "singularName": "page",
+    "pluralName": "pages",
+    "displayName": "Page",
     "description": ""
   },
   "options": {
@@ -12,7 +12,14 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "content": {
+    "name": {
+      "type": "string"
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "name"
+    },
+    "sections": {
       "type": "dynamiczone",
       "components": [
         "components.button-group",
@@ -24,6 +31,11 @@
         "components.testimonial",
         "components.title"
       ]
+    },
+    "SEO": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.seo"
     }
   }
 }

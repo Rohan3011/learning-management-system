@@ -106,11 +106,76 @@ export interface ComponentsTitle extends Schema.Component {
   info: {
     displayName: 'Title';
     icon: 'strikeThrough';
+    description: '';
   };
   attributes: {
     title: Attribute.String;
     subtitle: Attribute.String;
     description: Attribute.Text;
+  };
+}
+
+export interface GlobalNavbar extends Schema.Component {
+  collectionName: 'components_global_navbars';
+  info: {
+    displayName: 'Navbar';
+    icon: 'filter';
+    description: '';
+  };
+  attributes: {
+    logo: Attribute.Media;
+    cta: Attribute.Component<'components.button', true>;
+  };
+}
+
+export interface SharedMetaSocial extends Schema.Component {
+  collectionName: 'components_shared_meta_socials';
+  info: {
+    displayName: 'metaSocial';
+    icon: 'project-diagram';
+  };
+  attributes: {
+    socialNetwork: Attribute.Enumeration<['Facebook', 'Twitter']> &
+      Attribute.Required;
+    title: Attribute.String &
+      Attribute.Required &
+      Attribute.SetMinMaxLength<{
+        maxLength: 60;
+      }>;
+    description: Attribute.String &
+      Attribute.Required &
+      Attribute.SetMinMaxLength<{
+        maxLength: 65;
+      }>;
+    image: Attribute.Media;
+  };
+}
+
+export interface SharedSeo extends Schema.Component {
+  collectionName: 'components_shared_seos';
+  info: {
+    displayName: 'seo';
+    icon: 'search';
+  };
+  attributes: {
+    metaTitle: Attribute.String &
+      Attribute.Required &
+      Attribute.SetMinMaxLength<{
+        maxLength: 60;
+      }>;
+    metaDescription: Attribute.String &
+      Attribute.Required &
+      Attribute.SetMinMaxLength<{
+        minLength: 50;
+        maxLength: 160;
+      }>;
+    metaImage: Attribute.Media;
+    metaSocial: Attribute.Component<'shared.meta-social', true>;
+    keywords: Attribute.Text;
+    metaRobots: Attribute.String;
+    structuredData: Attribute.JSON;
+    metaViewport: Attribute.String;
+    canonicalURL: Attribute.String;
   };
 }
 
@@ -125,6 +190,9 @@ declare module '@strapi/types' {
       'components.testimonial-list': ComponentsTestimonialList;
       'components.testimonial': ComponentsTestimonial;
       'components.title': ComponentsTitle;
+      'global.navbar': GlobalNavbar;
+      'shared.meta-social': SharedMetaSocial;
+      'shared.seo': SharedSeo;
     }
   }
 }

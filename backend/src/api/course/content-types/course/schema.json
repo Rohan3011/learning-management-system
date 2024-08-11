@@ -4,7 +4,8 @@
   "info": {
     "singularName": "course",
     "pluralName": "courses",
-    "displayName": "Course"
+    "displayName": "Course",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -17,10 +18,11 @@
     "description": {
       "type": "blocks"
     },
-    "instructors": {
+    "users_permissions_user": {
       "type": "relation",
-      "relation": "oneToMany",
-      "target": "admin::user"
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "courses"
     },
     "lessons": {
       "type": "relation",

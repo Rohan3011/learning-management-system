@@ -1,0 +1,13 @@
+{
+  "collectionName": "components_typograph_headings",
+  "info": {
+    "displayName": "Heading",
+    "icon": "strikeThrough"
+  },
+  "options": {},
+  "attributes": {
+    "value": {
+      "type": "string"
+    }
+  }
+}

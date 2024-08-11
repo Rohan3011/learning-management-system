@@ -29,7 +29,9 @@
         "components.hero-section",
         "components.testimonial-list",
         "components.testimonial",
-        "components.title"
+        "components.title",
+        "components.card-list",
+        "components.card"
       ]
     },
     "SEO": {

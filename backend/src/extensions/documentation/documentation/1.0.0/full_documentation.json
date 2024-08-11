@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "2024-08-11T06:57:04.411Z"
+    "x-generation-date": "2024-08-11T14:01:05.755Z"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -4328,6 +4328,12 @@
                     },
                     {
                       "$ref": "#/components/schemas/ComponentsTitleComponent"
+                    },
+                    {
+                      "$ref": "#/components/schemas/ComponentsCardListComponent"
+                    },
+                    {
+                      "$ref": "#/components/schemas/ComponentsCardComponent"
                     }
                   ]
                 }
@@ -4424,6 +4430,12 @@
                 },
                 {
                   "$ref": "#/components/schemas/ComponentsTitleComponent"
+                },
+                {
+                  "$ref": "#/components/schemas/ComponentsCardListComponent"
+                },
+                {
+                  "$ref": "#/components/schemas/ComponentsCardComponent"
                 }
               ]
             }
@@ -5221,6 +5233,48 @@
             "type": "string"
           },
           "description": {
+            "type": "string"
+          }
+        }
+      },
+      "ComponentsCardComponent": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "__component": {
+            "type": "string"
+          },
+          "title": {
+            "$ref": "#/components/schemas/TypographHeadingComponent"
+          }
+        }
+      },
+      "ComponentsCardListComponent": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "__component": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "cards": {
+            "$ref": "#/components/schemas/ComponentsCardComponent"
+          }
+        }
+      },
+      "TypographHeadingComponent": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "value": {
             "type": "string"
           }
         }

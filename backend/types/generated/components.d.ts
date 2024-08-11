@@ -28,6 +28,29 @@ export interface ComponentsButton extends Schema.Component {
   };
 }
 
+export interface ComponentsCardList extends Schema.Component {
+  collectionName: 'components_components_card_lists';
+  info: {
+    displayName: 'CardList';
+    icon: 'bulletList';
+  };
+  attributes: {
+    title: Attribute.String;
+    cards: Attribute.Component<'components.card'>;
+  };
+}
+
+export interface ComponentsCard extends Schema.Component {
+  collectionName: 'components_components_cards';
+  info: {
+    displayName: 'Card';
+    icon: 'grid';
+  };
+  attributes: {
+    title: Attribute.Component<'typograph.heading'>;
+  };
+}
+
 export interface ComponentsCourseItem extends Schema.Component {
   collectionName: 'components_components_course_items';
   info: {
@@ -179,11 +202,24 @@ export interface SharedSeo extends Schema.Component {
   };
 }
 
+export interface TypographHeading extends Schema.Component {
+  collectionName: 'components_typograph_headings';
+  info: {
+    displayName: 'Heading';
+    icon: 'strikeThrough';
+  };
+  attributes: {
+    value: Attribute.String;
+  };
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface Components {
       'components.button-group': ComponentsButtonGroup;
       'components.button': ComponentsButton;
+      'components.card-list': ComponentsCardList;
+      'components.card': ComponentsCard;
       'components.course-item': ComponentsCourseItem;
       'components.course-list': ComponentsCourseList;
       'components.hero-section': ComponentsHeroSection;
@@ -193,6 +229,7 @@ declare module '@strapi/types' {
       'global.navbar': GlobalNavbar;
       'shared.meta-social': SharedMetaSocial;
       'shared.seo': SharedSeo;
+      'typograph.heading': TypographHeading;
     }
   }
 }

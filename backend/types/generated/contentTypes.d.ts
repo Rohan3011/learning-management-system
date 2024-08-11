@@ -511,7 +511,9 @@ export interface ApiPagePage extends Schema.CollectionType {
         'components.hero-section',
         'components.testimonial-list',
         'components.testimonial',
-        'components.title'
+        'components.title',
+        'components.card-list',
+        'components.card'
       ]
     >;
     SEO: Attribute.Component<'shared.seo', true>;

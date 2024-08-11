@@ -31,10 +31,10 @@ const config = {
     // 'zh',
   ],
   auth: {
-    logo,
+    logo: logo,
   },
   menu: {
-    logo,
+    logo: logo,
   },
   head: {
     favicon,
@@ -46,7 +46,32 @@ const config = {
 
   translations: {
     en: {
+      "app.components.LeftMenu.navbrand.title": "Dashboard",
+      "app.components.LeftMenu.navbrand.workplace": " ",
       "app.components.HomePage.welcome": "Hello World",
+    },
+  },
+
+  theme: {
+    // overwrite light theme properties
+    light: {
+      colors: {
+        primary100: "#fef3c7",
+        primary200: "#fde68a",
+        primary500: "#f59e0b",
+        buttonPrimary500: "#f59e0b",
+        primary600: "#d97706",
+        buttonPrimary600: "#d97706",
+        primary700: "#b45309",
+        buttonPrimary700: "#b45309",
+        danger700: "#b72b1a",
+
+        secondary100: "#dcfce7",
+        secondary200: "#bbf7d0",
+        secondary500: "#22c55e",
+        secondary600: "#16a34a",
+        secondary700: "#15803d",
+      },
     },
   },
 };
